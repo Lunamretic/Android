@@ -32,6 +32,8 @@ public class UsernameActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_username);
 
+        setTitle(R.string.title_username_activity);
+
         editUsername = (EditText) findViewById(R.id.editEmail);
         buttonChangeUsername = (Button) findViewById(R.id.buttonChangeUsername);
 

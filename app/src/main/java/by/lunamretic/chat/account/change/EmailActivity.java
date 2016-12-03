@@ -30,6 +30,8 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
 
+        setTitle(R.string.title_email_activity);
+
         editEmail = (EditText) findViewById(R.id.editEmail);
         buttonChangeEmail = (Button) findViewById(R.id.buttonChangeEmail);
 

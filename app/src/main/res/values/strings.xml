@@ -1,16 +1,23 @@
 <resources>
     <string name="app_name">Chat</string>
-    <string name="title_text">Messages</string>
+
+    <string name="title_messages_activity">Messages</string>
+    <string name="title_email_activity">Change email</string>
+    <string name="title_username_activity">Change username</string>
+    <string name="title_settings_activity">Settings</string>
+    <string name="title_login_activity">Login</string>
+    <string name="title_register_activity">Registration</string>
+
     <string name="empty_username">None</string>
 
     <string name="enter_username">Please enter username</string>
     <string name="enter_email">Please enter email</string>
     <string name="enter_password">Please enter password</string>
 
-    <string name="login">Login...</string>
+    <string name="login">Login…</string>
     <string name="login_failed">Login failed!</string>
 
-    <string name="registration">Registration...</string>
+    <string name="registration">Registration…</string>
     <string name="registered">Registered</string>
     <string name="registration_failed">Registration failed!</string>
 

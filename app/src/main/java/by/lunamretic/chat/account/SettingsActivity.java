@@ -30,6 +30,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
+        setTitle(R.string.title_settings_activity);
+
         textEmail = (TextView) findViewById(R.id.textEmail);
         textUsername = (TextView) findViewById(R.id.textUsername);
         textLogOut = (TextView) findViewById(R.id.textLogOut);

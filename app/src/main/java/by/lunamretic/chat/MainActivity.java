@@ -43,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle(R.string.title_text);
+
+        setTitle(R.string.title_messages_activity);
 
         sendMsg = (Button) findViewById(R.id.btnSendMsg);
         textField = (EditText) findViewById(R.id.textField);
