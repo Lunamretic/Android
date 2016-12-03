@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "948019273029",
+    "firebase_url": "https://chat-f2589.firebaseio.com",
+    "project_id": "chat-f2589",
+    "storage_bucket": "chat-f2589.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948019273029:android:7ba6cb058fd8b567",
+        "android_client_info": {
+          "package_name": "by.lunamretic.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948019273029-7l4sep2jvp64od1b5ksbo0bpq20fce0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApnORFh78EPEN2XyCEGOYNC9GrcMJzka0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
