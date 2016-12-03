@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         textField = (EditText) findViewById(R.id.textField);
         chatHistory = (ListView) findViewById(R.id.listHistoryMsg);
 
-        requestUserName();
 
         root = FirebaseDatabase.getInstance().getReference();
 
@@ -109,23 +108,6 @@ public class MainActivity extends AppCompatActivity {
                 adb.show();
             }
         });
-    }
-
-    private void requestUserName() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter your name: ");
-
-        final EditText inputField = new EditText(this);
-
-        builder.setView(inputField);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                username = inputField.getText().toString();
-            }
-        });
-
-        builder.show();
     }
 
     class Message {

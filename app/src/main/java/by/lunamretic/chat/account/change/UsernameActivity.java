@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,7 +32,7 @@ public class UsernameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_username);
 
-        editUsername = (EditText) findViewById(R.id.editUsername);
+        editUsername = (EditText) findViewById(R.id.editEmail);
         buttonChangeUsername = (Button) findViewById(R.id.buttonChangeUsername);
 
         getUserInfo();
