@@ -1,6 +1,7 @@
 package by.lunamretic.chat;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import by.lunamretic.chat.account.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,6 +55,18 @@ public class MainActivity extends AppCompatActivity {
         sendMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
+                ВНИМАНИЕ!!!!!!!!!!
+                 */
+
+                Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(settingsIntent);
+
+                /*
+                ВНИМАНИЕ!!!!!!!!!!
+                 */
+
+                /*
                 Map<String, Object> map = new HashMap<>();
                 idMsg = root.push().getKey();
                 root.updateChildren(map);
@@ -63,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 map2.put("message", textField.getText().toString());
 
                 rootMsg.updateChildren(map2);
-                textField.setText("");
+                textField.setText("");*/
             }
         });
 

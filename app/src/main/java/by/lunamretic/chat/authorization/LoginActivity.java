@@ -16,14 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import org.w3c.dom.Text;
 
 import by.lunamretic.chat.MainActivity;
 import by.lunamretic.chat.R;
-import by.lunamretic.chat.account.SettingsActivity;
-import by.lunamretic.chat.account.change.UsernameActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -53,14 +48,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        if (firebaseAuth.getCurrentUser() != null ) {
-            finish();
-            Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(mainIntent);
-        }
+        isSignedIn();
 
         linkRegister.setOnClickListener(this);
         buttonLogin.setOnClickListener(this);
+    }
+
+    private void isSignedIn() {
+        if (firebaseAuth.getCurrentUser() != null ) {
+            finish();
+
+            Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(mainIntent);
+        }
+    }
+
+    private void singIn(String email, String password) {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    finish();
+
+                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(mainIntent);
+                } else {
+                    progressDialog.dismiss();
+
+                    Toast.makeText(LoginActivity.this, R.string.login_failed, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 
     private void userRegister() {
@@ -73,34 +92,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = editPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.enter_email, Toast.LENGTH_SHORT).show();
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.enter_password, Toast.LENGTH_SHORT).show();
             return;
         }
 
-        progressDialog.setMessage("Login...");
+        progressDialog.setMessage(this.getResources().getString(R.string.login));
         progressDialog.show();
 
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    finish();
-                    Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(mainIntent);
-                } else {
-                    progressDialog.dismiss();
-
-                    Toast.makeText(LoginActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
-
+        singIn(email, password);
     }
 
     @Override

@@ -25,6 +25,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText editEmail;
     private EditText editPassword;
 
+    private TextView linkLogin;
+
     private ProgressDialog progressDialog;
 
     private FirebaseAuth firebaseAuth;
@@ -38,59 +40,72 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
 
+        linkLogin = (TextView) findViewById(R.id.linkLogin);
+
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
 
         progressDialog = new ProgressDialog(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        final TextView linkLogin = (TextView) findViewById(R.id.linkLogin);
 
-        linkLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                RegisterActivity.this.startActivity(loginIntent);
-            }
-        });
-
+        linkLogin.setOnClickListener(this);
         buttonRegister.setOnClickListener(this);
     }
 
-    public void registerUser() {
-        String email = editEmail.getText().toString().trim();
-        String password = editPassword.getText().toString().trim();
-
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        progressDialog.setMessage("Registering...");
-        progressDialog.show();
-
+    private void createUser(String email, String password) {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, "Registered", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, R.string.registered, Toast.LENGTH_SHORT).show();
+
+                            finish();
                             Intent settingsIntent = new Intent(RegisterActivity.this, SettingsActivity.class);
-                            RegisterActivity.this.startActivity(settingsIntent);
+                            startActivity(settingsIntent);
                         } else {
-                            Toast.makeText(RegisterActivity.this, "Registration failed!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, R.string.registration_failed, Toast.LENGTH_SHORT).show();
                         }
 
                         progressDialog.hide();
                     }
                 });
     }
+
+    private void login() {
+        finish();
+
+        Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(loginIntent);
+    }
+
+    private void registerUser() {
+        String email = editEmail.getText().toString().trim();
+        String password = editPassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, R.string.enter_email, Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, R.string.enter_password, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        progressDialog.setMessage(this.getResources().getString(R.string.registration));
+        progressDialog.show();
+
+        createUser(email, password);
+    }
     @Override
     public void onClick(View v) {
-        registerUser();
+        if (v == linkLogin) {
+            login();
+        }
+
+        if (v == buttonRegister) {
+            registerUser();
+        }
     }
 }

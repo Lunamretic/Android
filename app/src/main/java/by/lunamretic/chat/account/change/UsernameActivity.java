@@ -21,7 +21,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import by.lunamretic.chat.R;
 import by.lunamretic.chat.account.SettingsActivity;
 
-public class UsernameActivity extends AppCompatActivity {
+public class UsernameActivity extends AppCompatActivity implements View.OnClickListener{
     EditText editUsername;
     Button buttonChangeUsername;
 
@@ -37,37 +37,7 @@ public class UsernameActivity extends AppCompatActivity {
 
         getUserInfo();
 
-        buttonChangeUsername.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isEmpty(editUsername.getText().toString())) {
-                    AlertDialog.Builder adb=new AlertDialog.Builder(UsernameActivity.this);
-                    adb.setMessage("Input username!");
-                    adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                        }});
-                    adb.show();
-                } else {
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(editUsername.getText().toString())
-                            .build();
-
-                    user.updateProfile(profileUpdates)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        //Log.d(TAG, "User profile updated.");
-
-                                        Intent settingsIntent = new Intent(UsernameActivity.this, SettingsActivity.class);
-                                        UsernameActivity.this.startActivity(settingsIntent);
-                                    }
-                                }
-                            });
-                }
-            }
-        });
-
+        buttonChangeUsername.setOnClickListener(this);
     }
 
     private void getUserInfo() {
@@ -76,11 +46,50 @@ public class UsernameActivity extends AppCompatActivity {
             String username = user.getDisplayName();
 
             if (TextUtils.isEmpty(username)) {
-                editUsername.setText("None");
-                Toast.makeText(this, "Please enter username", Toast.LENGTH_SHORT).show();
+                editUsername.setText(R.string.empty_username);
+                Toast.makeText(this, R.string.enter_username, Toast.LENGTH_SHORT).show();
             } else {
                 editUsername.setText(username);
             }
+        }
+    }
+
+    private void updateUsername() {
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(editUsername.getText().toString())
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            //Log.d(TAG, "User profile updated.");
+
+                            Intent settingsIntent = new Intent(UsernameActivity.this, SettingsActivity.class);
+                            UsernameActivity.this.startActivity(settingsIntent);
+                        }
+                    }
+                });
+    }
+
+    private void changeUsername() {
+        if (TextUtils.isEmpty(editUsername.getText().toString())) {
+            AlertDialog.Builder adb=new AlertDialog.Builder(UsernameActivity.this);
+            adb.setMessage(R.string.enter_username);
+            adb.setPositiveButton(R.string.ok, new AlertDialog.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                }});
+            adb.show();
+        } else {
+            updateUsername();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == buttonChangeUsername) {
+            changeUsername();
         }
     }
 }
