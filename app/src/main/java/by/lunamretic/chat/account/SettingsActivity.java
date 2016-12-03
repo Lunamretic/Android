@@ -63,15 +63,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void updateUsername() {
-        finish();
-
         Intent usernameIntent = new Intent(SettingsActivity.this, UsernameActivity.class);
         startActivity(usernameIntent);
     }
 
     private void updateEmail() {
-        finish();
-
         Intent emailIntent = new Intent(SettingsActivity.this, EmailActivity.class);
         startActivity(emailIntent);
     }
