@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import by.lunamretic.chat.MainActivity;
 import by.lunamretic.chat.R;
 import by.lunamretic.chat.account.change.EmailActivity;
 import by.lunamretic.chat.account.change.UsernameActivity;
@@ -32,6 +34,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         setTitle(R.string.title_settings_activity);
 
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         textEmail = (TextView) findViewById(R.id.textEmail);
         textUsername = (TextView) findViewById(R.id.textNavUsername);
         textLogOut = (TextView) findViewById(R.id.textLogOut);
@@ -44,6 +50,21 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         textUsername.setOnClickListener(this);
         textEmail.setOnClickListener(this);
         textLogOut.setOnClickListener(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            finish();
+
+            Intent mainIntent = new Intent(SettingsActivity.this, MainActivity.class);
+            startActivity(mainIntent);
+            //Log.d(TAG, "action bar clicked");
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void getUserInfo() {

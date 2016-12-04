@@ -208,16 +208,18 @@ public class MainActivity extends AppCompatActivity {
 
         chatHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                AlertDialog.Builder adb=new AlertDialog.Builder(MainActivity.this);
-                adb.setMessage("Are you sure you want to delete this message?");
-                final int positionToRemove = position;
-                adb.setNegativeButton("Cancel", null);
-                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        root.child(arrayList.get(positionToRemove).id).removeValue();
-                        adapter.remove(adapter.getItem(positionToRemove));
-                    }});
-                adb.show();
+                if (arrayList.get(position).author.equals(user.getDisplayName())) {
+                    AlertDialog.Builder adb=new AlertDialog.Builder(MainActivity.this);
+                    adb.setMessage("Are you sure you want to delete this message?");
+                    final int positionToRemove = position;
+                    adb.setNegativeButton("Cancel", null);
+                    adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            root.child(arrayList.get(positionToRemove).id).removeValue();
+                            adapter.remove(adapter.getItem(positionToRemove));
+                        }});
+                    adb.show();
+                }
             }
         });
     }

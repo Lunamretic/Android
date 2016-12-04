@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Button buttonLogin;
     private TextView linkRegister;
+    private TextView linkResetPassword;
 
     private ProgressDialog progressDialog;
 
@@ -45,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
 
         linkRegister = (TextView) findViewById(R.id.linkRegister);
+        linkResetPassword = (TextView) findViewById(R.id.textLinkResetPassword);
 
         progressDialog = new ProgressDialog(this);
 
@@ -53,6 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         isSignedIn();
 
         linkRegister.setOnClickListener(this);
+        linkResetPassword.setOnClickListener(this);
         buttonLogin.setOnClickListener(this);
     }
 
@@ -89,6 +92,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         startActivity(registerIntent);
     }
 
+    private void resetPassword() {
+        Intent resetPasswordIntent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+        startActivity(resetPasswordIntent);
+    }
+
     private void userLogin() {
         String email = editEmail.getText().toString().trim();
         String password = editPassword.getText().toString().trim();
@@ -112,6 +120,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if (v == linkRegister) {
             userRegister();
+        }
+
+        if (v == linkResetPassword) {
+            resetPassword();
         }
 
         if (v == buttonLogin) {

@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,12 +35,31 @@ public class UsernameActivity extends AppCompatActivity implements View.OnClickL
 
         setTitle(R.string.title_username_activity);
 
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         editUsername = (EditText) findViewById(R.id.editEmail);
         buttonChangeUsername = (Button) findViewById(R.id.buttonChangeUsername);
 
         getUserInfo();
 
         buttonChangeUsername.setOnClickListener(this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            finish();
+
+            Intent settingsIntent = new Intent(UsernameActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            //Log.d(TAG, "action bar clicked");
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void getUserInfo() {

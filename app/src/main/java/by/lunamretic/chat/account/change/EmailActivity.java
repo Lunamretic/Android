@@ -7,9 +7,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +23,7 @@ import by.lunamretic.chat.account.SettingsActivity;
 
 public class EmailActivity extends AppCompatActivity implements View.OnClickListener{
     EditText editEmail;
+    TextView tvCurrentEmail;
     Button buttonChangeEmail;
 
     FirebaseUser user;
@@ -32,7 +35,12 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
 
         setTitle(R.string.title_email_activity);
 
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         editEmail = (EditText) findViewById(R.id.editEmail);
+        tvCurrentEmail = (TextView) findViewById(R.id.textCurrentEmail);
         buttonChangeEmail = (Button) findViewById(R.id.buttonChangeEmail);
 
         getUserInfo();
@@ -40,12 +48,27 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
         buttonChangeEmail.setOnClickListener(this);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            finish();
+
+            Intent settingsIntent = new Intent(EmailActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            //Log.d(TAG, "action bar clicked");
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void getUserInfo() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String email = user.getEmail();
 
-            editEmail.setText(email);
+            tvCurrentEmail.setText(email);
         }
     }
 
