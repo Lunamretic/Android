@@ -3,10 +3,15 @@ package by.lunamretic.chat;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,7 +19,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 
 import by.lunamretic.chat.account.SettingsActivity;
+import by.lunamretic.chat.authorization.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +45,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText textField;
     private ListView chatHistory;
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
+
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +62,56 @@ public class MainActivity extends AppCompatActivity {
         sendMsg = (Button) findViewById(R.id.btnSendMsg);
         textField = (EditText) findViewById(R.id.textField);
         chatHistory = (ListView) findViewById(R.id.listHistoryMsg);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                switch (id) {
+
+                    case R.id.nav_messages:
+                        drawerLayout.closeDrawers();
+                        break;
+
+                    case R.id.nav_settings:
+                        Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                        startActivity(settingsIntent);
+                        break;
+
+                    case R.id.nav_logout:
+                        AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
+                        adb.setMessage("Are you sure you want to log out?");
+                        adb.setNegativeButton("Cancel", null);
+                        adb.setPositiveButton("Yes", new AlertDialog.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                firebaseAuth.signOut();
+
+                                finish();
+                                Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                                startActivity(loginIntent);
+                            }});
+                        adb.show();
+                        break;
+                }
+                return false;
+            }
+        });
+
+
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
         root = FirebaseDatabase.getInstance().getReference();
@@ -125,6 +188,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     class Message {
         String author;
