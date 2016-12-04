@@ -10,11 +10,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp"
-        android:id="@+id/textUsername"
+        android:id="@+id/textNavUsername"
         android:textSize="20sp"
         android:textColor="@android:color/white"
         android:layout_marginBottom="12dp"
-        android:layout_above="@+id/textUserEmail"
+        android:layout_above="@+id/textNavEmail"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -22,10 +22,10 @@
         android:text="USER EMAIL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textUserEmail"
+        android:id="@+id/textNavEmail"
         android:textSize="16sp"
         android:layout_marginBottom="12dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/textUsername"
-        android:layout_alignStart="@+id/textUsername" />
+        android:layout_alignLeft="@+id/textNavUsername"
+        android:layout_alignStart="@+id/textNavUsername" />
 </RelativeLayout>

@@ -33,7 +33,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         setTitle(R.string.title_settings_activity);
 
         textEmail = (TextView) findViewById(R.id.textEmail);
-        textUsername = (TextView) findViewById(R.id.textUsername);
+        textUsername = (TextView) findViewById(R.id.textNavUsername);
         textLogOut = (TextView) findViewById(R.id.textLogOut);
 
         user = FirebaseAuth.getInstance().getCurrentUser();

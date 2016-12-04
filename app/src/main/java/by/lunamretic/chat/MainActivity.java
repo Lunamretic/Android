@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,9 +20,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,15 +38,18 @@ import java.util.List;
 import java.util.Map;
 
 import by.lunamretic.chat.account.SettingsActivity;
+import by.lunamretic.chat.account.change.UsernameActivity;
 import by.lunamretic.chat.authorization.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private String idMsg;
-    private String username;
     private Button sendMsg;
     private EditText textField;
     private ListView chatHistory;
+
+    private TextView navUsername;
+    private TextView navEmail;
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -51,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
+
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +72,32 @@ public class MainActivity extends AppCompatActivity {
         textField = (EditText) findViewById(R.id.textField);
         chatHistory = (ListView) findViewById(R.id.listHistoryMsg);
 
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+        navUsername = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textNavUsername);
+        navEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textNavEmail);
+
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+            username = user.getDisplayName();
+            if (TextUtils.isEmpty(username)) {
+                navUsername.setText(R.string.empty_username);
+                Toast.makeText(this, R.string.enter_username, Toast.LENGTH_SHORT).show();
+            } else {
+                navUsername.setText(username);
+            }
+
+            navEmail.setText(user.getEmail());
+        }
 
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -119,30 +148,34 @@ public class MainActivity extends AppCompatActivity {
         sendMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*
-                ВНИМАНИЕ!!!!!!!!!!
-                 */
+                if (TextUtils.isEmpty(textField.getText().toString())) {
+                    return;
+                }
 
-                Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
-                startActivity(settingsIntent);
+                if (TextUtils.isEmpty(username)) {
+                    AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
+                    adb.setMessage(R.string.enter_username);
+                    adb.setPositiveButton(R.string.ok, new AlertDialog.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent usernameIntent = new Intent(MainActivity.this, UsernameActivity.class);
+                            startActivity(usernameIntent);
+                        }});
+                    adb.show();
 
-                /*
-                ВНИМАНИЕ!!!!!!!!!!
-                 */
+                } else {
+                    Map<String, Object> map = new HashMap<>();
+                    idMsg = root.push().getKey();
+                    root.updateChildren(map);
 
-                /*
-                Map<String, Object> map = new HashMap<>();
-                idMsg = root.push().getKey();
-                root.updateChildren(map);
+                    DatabaseReference rootMsg = root.child(idMsg);
 
-                DatabaseReference rootMsg = root.child(idMsg);
+                    Map<String, Object> map2 = new HashMap<>();
+                    map2.put("user", username);
+                    map2.put("message", textField.getText().toString());
 
-                Map<String, Object> map2 = new HashMap<>();
-                map2.put("user", username);
-                map2.put("message", textField.getText().toString());
-
-                rootMsg.updateChildren(map2);
-                textField.setText("");*/
+                    rootMsg.updateChildren(map2);
+                    textField.setText("");
+                }
             }
         });
 
