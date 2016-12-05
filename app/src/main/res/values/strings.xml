@@ -14,6 +14,11 @@
     <string name="enter_email">Please enter email</string>
     <string name="enter_password">Please enter password</string>
 
+    <string name="short_username">Username it too short</string>
+    <string name="short_password">Password is too short</string>
+
+    <string name="not_match_passwords">Passwords must match</string>
+
     <string name="login">Login…</string>
     <string name="login_failed">Login failed!</string>
 
@@ -37,5 +42,12 @@
     <string name="reset_password">Cannot log in? We will send reset instructions to the email address associated with your account.</string>
     <string name="error_reset_password">User with this email address not found.</string>
     <string name="success_reset_password">Check your email for a link to reset your password.</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="have_an_account">Have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="welcome">WELCOME</string>
 
 </resources>
