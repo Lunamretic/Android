@@ -31,7 +31,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import by.lunamretic.chat.MainActivity;
 import by.lunamretic.chat.R;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editUsername;
     private EditText editEmail;
@@ -59,9 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-
-        setTitle(R.string.title_register_activity);
+        setContentView(R.layout.activity_registration);
 
         editUsername = (EditText) findViewById(R.id.editUsername);
         editEmail = (EditText) findViewById(R.id.editEmail);
@@ -161,7 +159,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                         public void onFinish() {
                                             finish();
 
-                                            Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                                            Intent mainIntent = new Intent(RegistrationActivity.this, MainActivity.class);
                                             startActivity(mainIntent);
                                         }
                                     }.start();
@@ -174,7 +172,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                             restoreSignUpButton();
 
-                            Toast.makeText(RegisterActivity.this, R.string.registration_failed, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegistrationActivity.this, R.string.registration_failed, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -183,7 +181,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void login() {
         finish();
 
-        Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+        Intent loginIntent = new Intent(RegistrationActivity.this, LoginActivity.class);
         startActivity(loginIntent);
     }
 

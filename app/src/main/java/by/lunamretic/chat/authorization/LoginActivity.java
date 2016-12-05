@@ -38,15 +38,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        setTitle(R.string.title_login_activity);
-
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
 
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
 
         linkRegister = (TextView) findViewById(R.id.linkRegister);
-        linkResetPassword = (TextView) findViewById(R.id.textLinkResetPassword);
+        linkResetPassword = (TextView) findViewById(R.id.linkResetPassword);
 
         progressDialog = new ProgressDialog(this);
 
@@ -88,7 +86,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void userRegister() {
-        Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
+        Intent registerIntent = new Intent(LoginActivity.this, RegistrationActivity.class);
         startActivity(registerIntent);
     }
 

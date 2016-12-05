@@ -18,12 +18,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".authorization.RegisterActivity" />
+        <activity android:name=".authorization.RegistrationActivity" />
         <activity android:name=".account.SettingsActivity" />
         <activity android:name=".account.change.UsernameActivity" />
         <activity android:name=".account.change.EmailActivity" />
         <activity android:name=".authorization.ResetPasswordActivity" />
-        <activity android:name=".information.AboutAppActivity"></activity>
     </application>
 
 </manifest>
