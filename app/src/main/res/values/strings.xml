@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chatroom</string>
+    <string name="app_name" translatable="false">Chatroom</string>
 
     <string name="title_messages_activity">Messages</string>
     <string name="title_email_activity">Change email</string>
@@ -8,7 +8,7 @@
     <string name="title_login_activity">Login</string>
     <string name="title_register_activity">Registration</string>
 
-    <string name="empty_username">None</string>
+    <string name="empty_username" translatable="false">None</string>
 
     <string name="enter_username">Please enter username</string>
     <string name="enter_email">Please enter email</string>
@@ -26,11 +26,11 @@
     <string name="registered">Registered</string>
     <string name="registration_failed">Registration failed!</string>
 
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
     <string name="title_activity_main2">Main2Activity</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
 
@@ -52,7 +52,8 @@
     <string name="log_in">log in</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="forget_password">Forget password</string>
-    <string name="send">Send</string>
+    <string name="send" translatable="false">Send</string>
     <string name="type_message">Type a message</string>
+    <string name="info">Info</string>
 
 </resources>

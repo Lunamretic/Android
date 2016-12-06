@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Chatroom</string>
+    <string name="action_settings">Settings</string>
+    <string name="close">Close</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="email">Email</string>
+    <string name="email_sent">"Email "</string>
+    <string name="empty_username">None</string>
+    <string name="enter_email">Please enter email</string>
+    <string name="enter_password">Please enter password</string>
+    <string name="enter_username">Please enter username</string>
+    <string name="error_reset_password">User with this email address not found.</string>
+    <string name="forget_password">Forget password</string>
+    <string name="have_an_account">Have an account?</string>
+    <string name="info">Info</string>
+    <string name="log_in">log in</string>
+    <string name="login">Login…</string>
+    <string name="login_failed">Login failed!</string>
+    <string name="name">Name</string>
+    <string name="not_match_passwords">Passwords must match</string>
+    <string name="ok">OK</string>
+    <string name="open">Open</string>
+    <string name="password">Password</string>
+    <string name="registered">Registered</string>
+    <string name="registration">Registration…</string>
+    <string name="registration_failed">Registration failed!</string>
+    <string name="reset_password">Cannot log in? We will send reset instructions to the email address associated with your account.</string>
+    <string name="send">Send</string>
+    <string name="short_password">Password is too short</string>
+    <string name="short_username">Username it too short</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="success_reset_password">Check your email for a link to reset your password.</string>
+    <string name="title_activity_main2"></string>
+    <string name="title_email_activity">Check your email for a link to reset your password.</string>
+    <string name="title_login_activity">Login</string>
+    <string name="title_messages_activity">Messages</string>
+    <string name="title_register_activity">Registration</string>
+    <string name="title_settings_activity">Settings</string>
+    <string name="title_username_activity">Change username</string>
+    <string name="type_message">Type a message</string>
+    <string name="welcome">WELCOME</string>
+</resources>

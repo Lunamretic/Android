@@ -1,7 +1,9 @@
 package by.lunamretic.chat.authorization;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +14,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.content.res.Configuration;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Locale;
 
 import by.lunamretic.chat.MainActivity;
 import by.lunamretic.chat.R;
@@ -33,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth firebaseAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog = new ProgressDialog(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        loadLocalization();
 
         isSignedIn();
 
@@ -126,6 +134,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (v == buttonLogin) {
             userLogin();
+        }
+    }
+
+    private void setLocalization(String localization) {
+        Locale locale = new Locale(localization);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config,
+                getBaseContext().getResources().getDisplayMetrics());
+        this.setContentView(R.layout.activity_login);
+    }
+
+    private void loadLocalization() {
+        SharedPreferences sPref = getApplicationContext().getSharedPreferences("by.lunamretic.chat", Context.MODE_PRIVATE);
+        final String LANGUAGE = "LOCALIZATION";
+
+        String localization = sPref.getString(LANGUAGE, "DEFAULT");
+
+        if (!localization.matches("DEFAULT")) {
+            setLocalization(localization);
         }
     }
 }

@@ -12,15 +12,19 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.w3c.dom.Text;
+
 import by.lunamretic.chat.MainActivity;
 import by.lunamretic.chat.R;
 import by.lunamretic.chat.account.change.EmailActivity;
 import by.lunamretic.chat.account.change.UsernameActivity;
+import by.lunamretic.chat.account.settings.LanguageActivity;
 import by.lunamretic.chat.authorization.LoginActivity;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
     TextView textEmail;
     TextView textUsername;
+    TextView linkChangeLanguage;
     TextView textLogOut;
 
     FirebaseUser user;
@@ -41,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         textEmail = (TextView) findViewById(R.id.textEmail);
         textUsername = (TextView) findViewById(R.id.textNavUsername);
         textLogOut = (TextView) findViewById(R.id.textLogOut);
+        linkChangeLanguage = (TextView) findViewById(R.id.linkChangeLanguage);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         firebaseAuth = FirebaseAuth.getInstance();
@@ -50,6 +55,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         textUsername.setOnClickListener(this);
         textEmail.setOnClickListener(this);
         textLogOut.setOnClickListener(this);
+        linkChangeLanguage.setOnClickListener(this);
     }
 
     @Override
@@ -93,6 +99,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         startActivity(emailIntent);
     }
 
+    private void changeLanguage() {
+        Intent languageIntent = new Intent(SettingsActivity.this, LanguageActivity.class);
+        startActivity(languageIntent);
+    }
+
     private void logout() {
         firebaseAuth.signOut();
 
@@ -110,6 +121,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         if (v == textEmail) {
             updateEmail();
+        }
+
+        if (v == linkChangeLanguage) {
+            changeLanguage();
         }
 
         if (v == textLogOut) {

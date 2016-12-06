@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Chatroom</string>
+    <string name="action_settings">Настройки</string>
+    <string name="close">Закрыть</string>
+    <string name="ok" translatable="false">OK</string>
+    <string name="password">Пароль</string>
+    <string name="open">Open</string>
+    <string name="registration">Регистрация...</string>
+    <string name="confirm_password">Подтвердите пароль</string>
+    <string name="don_t_have_an_account">Еще нет аккаунта?</string>
+    <string name="email">Емеил</string>
+    <string name="email_sent"></string>
+    <string name="empty_username">None</string>
+    <string name="enter_email">Пожалуйста, введите емеил</string>
+    <string name="enter_password">Пожалуйста, введите пароль</string>
+    <string name="enter_username">Пожалуйста, введите имя пользователя</string>
+    <string name="error_reset_password">Пользователь с таким емеилом не найден.</string>
+    <string name="forget_password">Забыли пароль?</string>
+    <string name="have_an_account">Уже есть аккаунт?</string>
+    <string name="info">Информация</string>
+    <string name="log_in">Войти</string>
+    <string name="login">Вход...</string>
+    <string name="login_failed"></string>
+    <string name="name">Имя</string>
+    <string name="not_match_passwords">Пароли должны совпадать!</string>
+    <string name="registered">Зарегистрирован</string>
+    <string name="registration_failed">Ошибка регистрации!</string>
+    <string name="reset_password">Не можете войти? Мы отправим вам инструкцию на емеил-адресс аккаунта.</string>
+    <string name="send">Send</string>
+    <string name="short_password">Пароль слишком короткий</string>
+    <string name="short_username">Имя пользователя слишком короткое</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="success_reset_password">Проверьте свой емеил</string>
+    <string name="title_email_activity">Проверьте свой емеил</string>
+    <string name="title_login_activity">Логин</string>
+    <string name="title_messages_activity">Сообщения</string>
+    <string name="title_register_activity">Регистрация</string>
+    <string name="title_settings_activity">Настройки</string>
+    <string name="title_username_activity">Сменить имя пользователя</string>
+    <string name="type_message">Введите сообщение</string>
+    <string name="welcome">ДОБРО ПОЖАЛОВАТЬ</string>
+</resources>
