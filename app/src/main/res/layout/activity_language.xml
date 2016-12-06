@@ -49,6 +49,7 @@
             android:id="@+id/russianTextView"
             android:layout_weight="1"
             android:padding="10dp"
+            android:textSize="18sp"
             android:background="@drawable/settings_selector"/>
 
         <TextView
@@ -59,7 +60,8 @@
             android:id="@+id/englishTextView"
             android:layout_weight="1"
             android:padding="10dp"
-            android:background="@drawable/settings_selector"/>
+            android:textSize="18sp"
+            android:background="@drawable/settings_selector_bottom_corners"/>
 
     </LinearLayout>
 </RelativeLayout>
