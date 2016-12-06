@@ -3,7 +3,7 @@
     <string name="app_name">Chatroom</string>
     <string name="action_settings">Настройки</string>
     <string name="close">Закрыть</string>
-    <string name="ok" translatable="false">OK</string>
+    <string name="ok" translatable="false">Ок</string>
     <string name="password">Пароль</string>
     <string name="open">Open</string>
     <string name="registration">Регистрация...</string>
@@ -11,7 +11,7 @@
     <string name="don_t_have_an_account">Еще нет аккаунта?</string>
     <string name="email">Емеил</string>
     <string name="email_sent"></string>
-    <string name="empty_username">None</string>
+    <string name="empty_username">Отсутствует</string>
     <string name="enter_email">Пожалуйста, введите емеил</string>
     <string name="enter_password">Пожалуйста, введите пароль</string>
     <string name="enter_username">Пожалуйста, введите имя пользователя</string>
@@ -27,7 +27,7 @@
     <string name="registered">Зарегистрирован</string>
     <string name="registration_failed">Ошибка регистрации!</string>
     <string name="reset_password">Не можете войти? Мы отправим вам инструкцию на емеил-адресс аккаунта.</string>
-    <string name="send">Send</string>
+    <string name="send">Отпрвить</string>
     <string name="short_password">Пароль слишком короткий</string>
     <string name="short_username">Имя пользователя слишком короткое</string>
     <string name="sign_up">Регистрация</string>
@@ -56,4 +56,8 @@
     <string name="change__username">Вы можете изменить свое текущее имя пользователя. Запомлните форму ниже.</string>
     <string name="save">Cохранить</string>
     <string name="saved">Сохранено</string>
+    <string name="menu_log_out">Выйти</string>
+    <string name="menu_messages">Сообщения</string>
+    <string name="menu_settings">Настрйоки</string>
+    <string name="reset_your_password">Восстановить пароль</string>
 </resources>

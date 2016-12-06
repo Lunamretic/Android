@@ -57,4 +57,8 @@
     <string name="save">Save</string>
     <string name="change__email">You can change your email. Fill the form below and folow instructions. NOT__WORKING</string>
     <string name="saved">Saved</string>
+    <string name="menu_messages">Messages</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_log_out">Log Out</string>
+    <string name="reset_your_password">Reset your password</string>
 </resources>

@@ -34,7 +34,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
 
         auth = FirebaseAuth.getInstance();
 
-        etEmail = (EditText) findViewById(R.id.editResetPasswordEmail);
+        etEmail = (EditText) findViewById(R.id.editSendToEmail);
 
         buttonSend = (Button) findViewById(R.id.buttonResetPassword);
 

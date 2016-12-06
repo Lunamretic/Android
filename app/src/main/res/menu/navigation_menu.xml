@@ -3,14 +3,14 @@
 
     <item android:id="@+id/nav_messages"
         android:icon="@mipmap/ic_message_black_24dp"
-        android:title="Messages"></item>
+        android:title="@string/menu_messages"/>
 
     <item android:id="@+id/nav_settings"
         android:icon="@mipmap/ic_settings_black_24dp"
-        android:title="Settings"></item>
+        android:title="@string/menu_settings"/>
 
     <item android:id="@+id/nav_logout"
         android:icon="@mipmap/ic_exit_to_app_black_24dp"
-        android:title="Log Out"></item>
+        android:title="@string/menu_log_out"/>
 
 </menu>

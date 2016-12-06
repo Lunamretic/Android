@@ -58,15 +58,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         loadLocalization();
 
-        isSignedIn();
+        checkSignedIn();
 
         linkRegister.setOnClickListener(this);
         linkResetPassword.setOnClickListener(this);
         buttonLogin.setOnClickListener(this);
     }
 
-    private void isSignedIn() {
-        if (firebaseAuth.getCurrentUser() != null ) {
+    private boolean isSignedIn() {
+        return firebaseAuth.getCurrentUser() != null;
+    }
+
+    private void checkSignedIn() {
+        if (isSignedIn()) {
             finish();
 
             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
@@ -151,9 +155,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences sPref = getApplicationContext().getSharedPreferences("by.lunamretic.chat", Context.MODE_PRIVATE);
         final String LANGUAGE = "LOCALIZATION";
 
-        String localization = sPref.getString(LANGUAGE, "DEFAULT");
+        String localization = sPref.getString(LANGUAGE, "");
 
-        if (!localization.matches("DEFAULT")) {
+        if (!localization.matches("") && isSignedIn()) {
             setLocalization(localization);
         }
     }
