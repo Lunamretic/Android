@@ -42,6 +42,10 @@ public class CustomAdapter extends BaseAdapter {
         return position;
     }
 
+    public void remove(int position) {
+        listData.remove(position);
+    }
+
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
 

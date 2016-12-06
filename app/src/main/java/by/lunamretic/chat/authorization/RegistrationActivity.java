@@ -314,21 +314,21 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private void registerUser() {
         if (checkForms()) {
-            registerAnimation();
-
-            registerDialog();
-
             String email = editEmail.getText().toString().trim();
             String password = editPassword.getText().toString().trim();
 
-            if (TextUtils.isEmpty(email)) {
-                Toast.makeText(this, R.string.enter_email, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (TextUtils.isEmpty(password)) {
-                Toast.makeText(this, R.string.enter_password, Toast.LENGTH_SHORT).show();
-                return;
-            }
+//            if (TextUtils.isEmpty(email)) {
+//                Toast.makeText(this, R.string.enter_email, Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+//            if (TextUtils.isEmpty(password)) {
+//                Toast.makeText(this, R.string.enter_password, Toast.LENGTH_SHORT).show();
+//                return;
+//            }
+
+            registerAnimation();
+
+            registerDialog();
 
             createUser(email, password);
         }

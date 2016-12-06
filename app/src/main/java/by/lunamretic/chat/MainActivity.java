@@ -95,8 +95,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
             @Override
@@ -153,9 +151,11 @@ public class MainActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(username)) {
                     AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
-                    adb.setMessage(R.string.enter_username);
+                    adb.setMessage(R.string.check_username);
                     adb.setPositiveButton(R.string.ok, new AlertDialog.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
+                            finish();
+
                             Intent usernameIntent = new Intent(MainActivity.this, UsernameActivity.class);
                             startActivity(usernameIntent);
                         }});
@@ -209,18 +209,19 @@ public class MainActivity extends AppCompatActivity {
 
         chatHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                /*if (arrayList.get(position).author.equals(user.getDisplayName())) {
+                if (arrayList.get(position).author.equals(user.getDisplayName())) {
                     AlertDialog.Builder adb=new AlertDialog.Builder(MainActivity.this);
-                    adb.setMessage("Are you sure you want to delete this message?");
+                    adb.setMessage(R.string.message_delete);
                     final int positionToRemove = position;
-                    adb.setNegativeButton("Cancel", null);
-                    adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    adb.setNegativeButton(R.string.cancel, null);
+                    adb.setPositiveButton(R.string.ok, new AlertDialog.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             root.child(arrayList.get(positionToRemove).id).removeValue();
-                            adapter.remove(adapter.getItem(positionToRemove));
+                            adapter.remove(positionToRemove);
+                            adapter.notifyDataSetChanged();
                         }});
                     adb.show();
-                }*/
+                }
             }
         });
     }
