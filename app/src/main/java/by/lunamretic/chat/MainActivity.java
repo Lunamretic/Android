@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -30,6 +31,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,7 +41,9 @@ import java.util.Map;
 
 import by.lunamretic.chat.account.SettingsActivity;
 import by.lunamretic.chat.account.change.UsernameActivity;
+import by.lunamretic.chat.adapter.CustomAdapter;
 import by.lunamretic.chat.authorization.LoginActivity;
+import by.lunamretic.chat.entity.Message;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -85,12 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (user != null) {
             username = user.getDisplayName();
-            if (TextUtils.isEmpty(username)) {
-                navUsername.setText(R.string.empty_username);
-                Toast.makeText(this, R.string.enter_username, Toast.LENGTH_SHORT).show();
-            } else {
-                navUsername.setText(username);
-            }
+            navUsername.setText(username);
 
             navEmail.setText(user.getEmail());
         }
@@ -170,6 +169,8 @@ public class MainActivity extends AppCompatActivity {
                     DatabaseReference rootMsg = root.child(idMsg);
 
                     Map<String, Object> map2 = new HashMap<>();
+                    map2.put("UID", user.getUid());
+                    map2.put("timestamp", ServerValue.TIMESTAMP);
                     map2.put("user", username);
                     map2.put("message", textField.getText().toString());
 
@@ -187,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                appendHistoryMsg(dataSnapshot);
+                //appendHistoryMsg(dataSnapshot);
             }
 
             @Override
@@ -208,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
 
         chatHistory.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                if (arrayList.get(position).author.equals(user.getDisplayName())) {
+                /*if (arrayList.get(position).author.equals(user.getDisplayName())) {
                     AlertDialog.Builder adb=new AlertDialog.Builder(MainActivity.this);
                     adb.setMessage("Are you sure you want to delete this message?");
                     final int positionToRemove = position;
@@ -219,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                             adapter.remove(adapter.getItem(positionToRemove));
                         }});
                     adb.show();
-                }
+                }*/
             }
         });
     }
@@ -235,35 +236,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    class Message {
-        String author;
-        String msg;
-        String id;
 
-        Message (String msg, String author, String id) {
-            this.author = author;
-            this.msg = msg;
-            this.id = id;
-        }
 
-        @Override
-        public String toString() {
-            return author + "\n" + msg;
-        }
-
-    }
-    List<Message> arrayList = new ArrayList<>();
-    ArrayAdapter<Message> adapter;
+    ArrayList<Message> arrayList = new ArrayList<>();
+    CustomAdapter adapter;
     private void appendHistoryMsg(DataSnapshot dataSnapshot) {
         Iterator i = dataSnapshot.getChildren().iterator();
 
         while (i.hasNext()) {
-            arrayList.add(new Message((String) ((DataSnapshot)i.next()).getValue(), (String) ((DataSnapshot)i.next()).getValue(), dataSnapshot.getKey()));
+            arrayList.add(new Message((String) ((DataSnapshot)i.next()).getValue(), (String) ((DataSnapshot)i.next()).getValue(),
+                    (long) ((DataSnapshot)i.next()).getValue(), (String) ((DataSnapshot)i.next()).getValue(), dataSnapshot.getKey()));
+            //arrayList.add(new Message((String) ((DataSnapshot)i.next()).getValue(), (String) ((DataSnapshot)i.next()).getValue(), (String) ((DataSnapshot)i.next()).getValue(), dataSnapshot.getKey()));
         }
 
-        adapter = new ArrayAdapter<>(this, R.layout.msg_row, arrayList);
+        // = new ArrayAdapter<>(this, R.layout.msg_row, arrayList);
+        //chatHistory.setAdapter(adapter);
+
+        adapter = new CustomAdapter(this, arrayList);
         chatHistory.setAdapter(adapter);
 
-        //adapter.notifyDataSetChanged();
     }
+
 }
