@@ -38,7 +38,7 @@
                 android:background="@color/deviderSettings" />
 
             <TextView
-                android:text="@string/username"
+                android:text="@string/settings_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"

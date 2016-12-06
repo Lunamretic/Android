@@ -33,7 +33,7 @@ public class UsernameActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_username);
 
-        setTitle(R.string.title_username_activity);
+        setTitle(R.string.title_settings_activity);
 
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -87,6 +87,7 @@ public class UsernameActivity extends AppCompatActivity implements View.OnClickL
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             //Log.d(TAG, "User profile updated.");
+                            Toast.makeText(getApplicationContext(), R.string.saved, Toast.LENGTH_SHORT).show();
 
                             Intent settingsIntent = new Intent(UsernameActivity.this, SettingsActivity.class);
                             UsernameActivity.this.startActivity(settingsIntent);

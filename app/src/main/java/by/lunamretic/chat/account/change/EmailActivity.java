@@ -11,11 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import by.lunamretic.chat.R;
@@ -23,7 +22,6 @@ import by.lunamretic.chat.account.SettingsActivity;
 
 public class EmailActivity extends AppCompatActivity implements View.OnClickListener{
     EditText editEmail;
-    TextView tvCurrentEmail;
     Button buttonChangeEmail;
 
     FirebaseUser user;
@@ -33,17 +31,14 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email);
 
-        setTitle(R.string.title_email_activity);
+        setTitle(R.string.title_settings_activity);
 
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         editEmail = (EditText) findViewById(R.id.editEmail);
-        tvCurrentEmail = (TextView) findViewById(R.id.textCurrentEmail);
         buttonChangeEmail = (Button) findViewById(R.id.buttonChangeEmail);
-
-        getUserInfo();
 
         buttonChangeEmail.setOnClickListener(this);
     }
@@ -63,15 +58,6 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
-    private void getUserInfo() {
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String email = user.getEmail();
-
-            tvCurrentEmail.setText(email);
-        }
-    }
-
     private void updateEmail() {
         user.updateEmail(editEmail.getText().toString())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -79,6 +65,7 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             //Log.d(TAG, "User email address updated.");
+                            Toast.makeText(getApplicationContext(), R.string.saved, Toast.LENGTH_SHORT).show();
                             finish();
 
                             Intent settingsIntent = new Intent(EmailActivity.this, SettingsActivity.class);

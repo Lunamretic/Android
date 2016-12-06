@@ -64,7 +64,12 @@
     <string name="general">General</string>
     <string name="change_password">Change Password</string>
     <string name="privacy">Privacy</string>
-    <string name="username">username</string>
+    <string name="username">Username</string>
     <string name="settings_email">email</string>
+    <string name="settings_username">username</string>
+    <string name="change__username">You can change your current username. Fill the form below.</string>
+    <string name="save">Save</string>
+    <string name="change__email">change_email</string>
+    <string name="saved">Saved</string>
 
 </resources>

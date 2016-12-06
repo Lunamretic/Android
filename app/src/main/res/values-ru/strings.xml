@@ -49,6 +49,11 @@
     <string name="privacy">Конфиденциальность</string>
     <string name="log_out">Выйти</string>
     <string name="general">Общие</string>
-    <string name="username">имя пользователя</string>
+    <string name="username">Имя пользователя</string>
     <string name="settings_email">емеил</string>
+    <string name="settings_username">имя пользователя</string>
+    <string name="change__email">Вы можете изменить свой емеил-адресс. Заполните форму и следуйте инструкциям. НЕ_РАБОТАЕТ</string>
+    <string name="change__username">Вы можете изменить свое текущее имя пользователя. Запомлните форму ниже.</string>
+    <string name="save">Cохранить</string>
+    <string name="saved">Сохранено</string>
 </resources>
