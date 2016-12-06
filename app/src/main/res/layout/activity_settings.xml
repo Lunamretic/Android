@@ -38,7 +38,7 @@
                 android:background="@color/deviderSettings" />
 
             <TextView
-                android:text="username"
+                android:text="@string/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
@@ -66,7 +66,7 @@
                 android:background="@color/deviderSettings" />
 
             <TextView
-                android:text="email"
+                android:text="@string/settings_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textEmail2"
@@ -98,7 +98,7 @@
             android:layout_marginTop="20dp">
 
             <TextView
-                android:text="Privacy"
+                android:text="@string/privacy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -115,7 +115,7 @@
                 android:background="@color/deviderSettings" />
 
             <TextView
-                android:text="Change Password"
+                android:text="@string/change_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textPrivacy"
@@ -135,7 +135,7 @@
             android:layout_marginTop="20dp">
 
             <TextView
-                android:text="General"
+                android:text="@string/general"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textChangePassword"
@@ -152,7 +152,7 @@
                 android:background="@color/deviderSettings" />
 
             <TextView
-                android:text="Change language"
+                android:text="@string/change_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linkChangeLanguage"
@@ -172,7 +172,7 @@
             android:background="@drawable/settings_shape">
 
             <TextView
-                android:text="Log out"
+                android:text="@string/log_out"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"

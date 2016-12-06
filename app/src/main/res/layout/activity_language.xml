@@ -20,7 +20,7 @@
         android:layout_marginTop="20dp">
 
         <TextView
-            android:text="Language"
+            android:text="@string/language"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView4"
@@ -34,7 +34,7 @@
             android:background="@color/deviderSettings" />
 
         <TextView
-            android:text="Choose the language to display in the application"
+            android:text="@string/choose_the_language_to_display"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textView"
@@ -42,7 +42,7 @@
             android:textSize="16sp"/>
 
         <TextView
-            android:text="Russian"
+            android:text="@string/russian"
             android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             android:background="@drawable/settings_selector"/>
 
         <TextView
-            android:text="English"
+            android:text="@string/english"
             android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

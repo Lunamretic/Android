@@ -55,5 +55,16 @@
     <string name="send" translatable="false">Send</string>
     <string name="type_message">Type a message</string>
     <string name="info">Info</string>
+    <string name="language">Language</string>
+    <string name="choose_the_language_to_display">Choose the language to display in the application</string>
+    <string name="russian">Russian</string>
+    <string name="english">English</string>
+    <string name="change_language">Change language</string>
+    <string name="log_out">Log out</string>
+    <string name="general">General</string>
+    <string name="change_password">Change Password</string>
+    <string name="privacy">Privacy</string>
+    <string name="username">username</string>
+    <string name="settings_email">email</string>
 
 </resources>

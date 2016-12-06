@@ -21,7 +21,7 @@
     <string name="info">Информация</string>
     <string name="log_in">Войти</string>
     <string name="login">Вход...</string>
-    <string name="login_failed"></string>
+    <string name="login_failed">Не удалось войти!</string>
     <string name="name">Имя</string>
     <string name="not_match_passwords">Пароли должны совпадать!</string>
     <string name="registered">Зарегистрирован</string>
@@ -40,4 +40,15 @@
     <string name="title_username_activity">Сменить имя пользователя</string>
     <string name="type_message">Введите сообщение</string>
     <string name="welcome">ДОБРО ПОЖАЛОВАТЬ</string>
+    <string name="choose_the_language_to_display">Выберите язык для отображения в приложении</string>
+    <string name="english">English</string>
+    <string name="language">Язык</string>
+    <string name="russian">Русский</string>
+    <string name="change_language">Изменить язык</string>
+    <string name="change_password">Изменить пароль</string>
+    <string name="privacy">Конфиденциальность</string>
+    <string name="log_out">Выйти</string>
+    <string name="general">Общие</string>
+    <string name="username">имя пользователя</string>
+    <string name="settings_email">емеил</string>
 </resources>

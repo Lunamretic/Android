@@ -41,4 +41,15 @@
     <string name="title_username_activity">Change username</string>
     <string name="type_message">Type a message</string>
     <string name="welcome">WELCOME</string>
+    <string name="choose_the_language_to_display">Choose the language to display in the application</string>
+    <string name="english">English</string>
+    <string name="language">Language</string>
+    <string name="russian">Русский</string>
+    <string name="log_out">Log out</string>
+    <string name="general">General</string>
+    <string name="change_password">Change Password</string>
+    <string name="privacy">Privacy</string>
+    <string name="change_language">Change language</string>
+    <string name="username">username</string>
+    <string name="settings_email">email</string>
 </resources>

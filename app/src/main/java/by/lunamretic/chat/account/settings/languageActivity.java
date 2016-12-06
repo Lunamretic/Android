@@ -68,6 +68,8 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
         this.setContentView(R.layout.activity_language);
+
+        setTitle(R.string.title_settings_activity);
     }
 
     private void saveLocalization(String language) {
