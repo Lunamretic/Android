@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,9 @@ import by.lunamretic.chat.R;
 import by.lunamretic.chat.account.SettingsActivity;
 
 public class UsernameActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private static final String TAG = "SettingsActivity";
+
     EditText editUsername;
     Button buttonChangeUsername;
 
@@ -56,7 +60,6 @@ public class UsernameActivity extends AppCompatActivity implements View.OnClickL
 
             Intent settingsIntent = new Intent(UsernameActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
-            //Log.d(TAG, "action bar clicked");
         }
 
         return super.onOptionsItemSelected(item);
@@ -86,11 +89,15 @@ public class UsernameActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            //Log.d(TAG, "User profile updated.");
+                            Log.d(TAG, "username changed");
+
                             Toast.makeText(getApplicationContext(), R.string.saved, Toast.LENGTH_SHORT).show();
 
+                            finish();
                             Intent settingsIntent = new Intent(UsernameActivity.this, SettingsActivity.class);
                             UsernameActivity.this.startActivity(settingsIntent);
+                        } else {
+                            Log.d(TAG, "couldn't change username");
                         }
                     }
                 });
@@ -104,6 +111,7 @@ public class UsernameActivity extends AppCompatActivity implements View.OnClickL
                 public void onClick(DialogInterface dialog, int which) {
                 }});
             adb.show();
+
         } else {
             updateUsername();
         }

@@ -12,7 +12,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.DecelerateInterpolator;
@@ -32,6 +32,8 @@ import by.lunamretic.chat.MainActivity;
 import by.lunamretic.chat.R;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = "RegistrationActivity";
 
     private EditText editUsername;
     private EditText editEmail;
@@ -78,12 +80,24 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         buttonRegister.setOnClickListener(this);
     }
 
-    private void setUsername(FirebaseUser user) {
-        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(editUsername.getText().toString())
-                .build();
+    private void setUsername(final FirebaseUser USER) {
+        final String USERNAME = editUsername.getText().toString();
 
-        user.updateProfile(profileUpdates);
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                        .setDisplayName(USERNAME)
+                        .build();
+
+                if (USER.updateProfile(profileUpdates).isSuccessful()) {
+                    Log.d(TAG, "new username set");
+                } else {
+                    Log.d(TAG, "couldn't set new username");
+                }
+            }
+        } ).start();
     }
 
     private void restoreSignUpButton() {
@@ -157,6 +171,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
                                         @Override
                                         public void onFinish() {
+                                            Log.d(TAG, "new user registered and signed in");
+
                                             finish();
 
                                             Intent mainIntent = new Intent(RegistrationActivity.this, MainActivity.class);
@@ -168,6 +184,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
 
                         } else {
+                            Log.d(TAG, "couldn't register new user");
+
                             dialog.dismiss();
 
                             restoreSignUpButton();

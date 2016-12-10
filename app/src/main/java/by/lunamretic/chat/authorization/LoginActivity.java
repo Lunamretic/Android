@@ -14,6 +14,7 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.DecelerateInterpolator;
@@ -34,6 +35,8 @@ import by.lunamretic.chat.MainActivity;
 import by.lunamretic.chat.R;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = "LoginActivity";
 
     private EditText editEmail;
     private EditText editPassword;
@@ -86,6 +89,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void checkSignedIn() {
         if (isSignedIn()) {
+            Log.d(TAG, "user is already signed in");
+
             finish();
 
             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
@@ -121,6 +126,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                 @Override
                                 public void onFinish() {
+                                    Log.d(TAG, "user signed in");
                                     finish();
 
                                     Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
@@ -135,6 +141,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     restoreSignInButton();
 
                     Toast.makeText(LoginActivity.this, R.string.login_failed, Toast.LENGTH_SHORT).show();
+
+                    Log.d(TAG, "couldn't signed in");
                 }
 
             }

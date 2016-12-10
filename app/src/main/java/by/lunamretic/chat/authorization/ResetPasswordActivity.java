@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import by.lunamretic.chat.R;
 
 public class ResetPasswordActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private static final String TAG = "ResetPasswordActivity";
 
     FirebaseAuth auth;
     EditText etEmail;
@@ -53,7 +56,6 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
 
             Intent loginIntent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
             startActivity(loginIntent);
-            //Log.d(TAG, "action bar clicked");
         }
 
         return super.onOptionsItemSelected(item);
@@ -71,13 +73,16 @@ public class ResetPasswordActivity extends AppCompatActivity implements View.OnC
                                 adb.setMessage(R.string.success_reset_password);
                                 adb.setPositiveButton(R.string.ok, null);
                                 adb.show();
-                                //Log.d(TAG, "Email sent.");
+
+                                Log.d(TAG, "email sent");
 
                             } else {
                                 AlertDialog.Builder adb = new AlertDialog.Builder(ResetPasswordActivity.this);
                                 adb.setMessage(R.string.error_reset_password);
                                 adb.setPositiveButton(R.string.ok, null);
                                 adb.show();
+
+                                Log.d(TAG, "couldn't sent email");
                             }
                         }
                     });

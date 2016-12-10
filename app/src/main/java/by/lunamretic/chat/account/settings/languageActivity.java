@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import by.lunamretic.chat.R;
 import by.lunamretic.chat.account.SettingsActivity;
 
 public class LanguageActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private static final String TAG = "LanguageActivity";
 
     private TextView rusTextView;
     private TextView engTextView;
@@ -53,7 +56,6 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
 
             Intent settingsIntent = new Intent(LanguageActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
-            //Log.d(TAG, "action bar clicked");
         }
 
         return super.onOptionsItemSelected(item);
@@ -74,10 +76,21 @@ public class LanguageActivity extends AppCompatActivity implements View.OnClickL
 
     private void saveLocalization(String language) {
         final String LANGUAGE = "LOCALIZATION";
+        final String LOCALIZATION = language;
 
-        SharedPreferences.Editor editor = sPref.edit();
-        editor.putString(LANGUAGE, language);
-        editor.commit();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences.Editor editor = sPref.edit();
+                editor.putString(LANGUAGE, LOCALIZATION);
+
+                if (editor.commit()) {
+                    Log.d(TAG, "language set to " + LOCALIZATION);
+                } else {
+                    Log.d(TAG, "couldn't set language");
+                }
+            }
+        }).start();
 
         Toast.makeText(this, "Changes saved", Toast.LENGTH_SHORT).show();
     }

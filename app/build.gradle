@@ -29,6 +29,7 @@ dependencies {
     compile 'com.google.firebase:firebase-database:9.0.2'
     compile 'com.google.firebase:firebase-core:9.0.2'
     compile 'com.google.firebase:firebase-auth:9.0.2'
+    compile 'com.google.firebase:firebase-messaging:9.0.2'
     compile 'com.android.volley:volley:1.0.0'
     testCompile 'junit:junit:4.12'
 }

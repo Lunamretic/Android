@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -52,7 +53,6 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
 
             Intent settingsIntent = new Intent(EmailActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
-            //Log.d(TAG, "action bar clicked");
         }
 
         return super.onOptionsItemSelected(item);
@@ -64,7 +64,8 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            //Log.d(TAG, "User email address updated.");
+                            Log.d("Profile", "Updated user email address");
+
                             Toast.makeText(getApplicationContext(), R.string.saved, Toast.LENGTH_SHORT).show();
                             finish();
 
@@ -85,6 +86,8 @@ public class EmailActivity extends AppCompatActivity implements View.OnClickList
             });
 
             adb.show();
+
+            Log.d("Warning", "Empty email field");
         } else {
             updateEmail();
         }

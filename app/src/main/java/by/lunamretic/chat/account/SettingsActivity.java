@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -11,8 +12,6 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import org.w3c.dom.Text;
 
 import by.lunamretic.chat.MainActivity;
 import by.lunamretic.chat.R;
@@ -22,6 +21,9 @@ import by.lunamretic.chat.account.settings.LanguageActivity;
 import by.lunamretic.chat.authorization.LoginActivity;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String TAG = "SettingsActivity";
+
     TextView textEmail;
     TextView textUsername;
     TextView linkChangeLanguage;
@@ -67,7 +69,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
             Intent mainIntent = new Intent(SettingsActivity.this, MainActivity.class);
             startActivity(mainIntent);
-            //Log.d(TAG, "action bar clicked");
         }
 
         return super.onOptionsItemSelected(item);
@@ -105,12 +106,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void logout() {
+        Log.d(TAG, "user log out");
+
         firebaseAuth.signOut();
 
         finish();
         Intent loginIntent = new Intent(SettingsActivity.this, LoginActivity.class);
         startActivity(loginIntent);
-
     }
 
     @Override

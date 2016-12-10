@@ -47,16 +47,13 @@ import by.lunamretic.chat.entity.Message;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     private String idMsg;
-    private Button sendMsg;
     private EditText textField;
     private ListView chatHistory;
 
-    private TextView navUsername;
-    private TextView navEmail;
-
     private DrawerLayout drawerLayout;
-    private NavigationView navigationView;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
     private DatabaseReference root = FirebaseDatabase.getInstance().getReference().getRoot();
@@ -72,14 +69,14 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle(R.string.title_messages_activity);
 
-        sendMsg = (Button) findViewById(R.id.btnSendMsg);
+        Button sendMsg = (Button) findViewById(R.id.btnSendMsg);
         textField = (EditText) findViewById(R.id.textField);
         chatHistory = (ListView) findViewById(R.id.listHistoryMsg);
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
 
-        navUsername = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textNavUsername);
-        navEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textNavEmail);
+        TextView navUsername = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textNavUsername);
+        TextView navEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.textNavEmail);
 
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
@@ -117,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
                         adb.setNegativeButton("Cancel", null);
                         adb.setPositiveButton("Yes", new AlertDialog.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                Log.d(TAG, "user log out");
+
                                 firebaseAuth.signOut();
 
                                 finish();
@@ -137,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
 
         root = FirebaseDatabase.getInstance().getReference();
@@ -176,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
 
                     rootMsg.updateChildren(map2);
                     textField.setText("");
+
+                    Log.d(TAG, "message sent");
                 }
             }
         });
@@ -228,12 +228,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        return actionBarDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 
@@ -247,15 +243,10 @@ public class MainActivity extends AppCompatActivity {
         while (i.hasNext()) {
             arrayList.add(new Message((String) ((DataSnapshot)i.next()).getValue(), (String) ((DataSnapshot)i.next()).getValue(),
                     (long) ((DataSnapshot)i.next()).getValue(), (String) ((DataSnapshot)i.next()).getValue(), dataSnapshot.getKey()));
-            //arrayList.add(new Message((String) ((DataSnapshot)i.next()).getValue(), (String) ((DataSnapshot)i.next()).getValue(), (String) ((DataSnapshot)i.next()).getValue(), dataSnapshot.getKey()));
         }
-
-        // = new ArrayAdapter<>(this, R.layout.msg_row, arrayList);
-        //chatHistory.setAdapter(adapter);
 
         adapter = new CustomAdapter(this, arrayList);
         chatHistory.setAdapter(adapter);
 
     }
-
 }
